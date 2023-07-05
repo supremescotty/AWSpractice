@@ -1,0 +1,40 @@
+#my template: change 'my-bucket-name' and 'my-file.txt' with the name of my S3 bucket and the name of my file each time.
+#check that the full path is inserted too
+
+import boto3
+
+# Create an S3 client
+s3 = boto3.client('s3')
+
+# Define the bucket name and the file to be uploaded
+bucket_name = 'my-bucket-name'
+file_name = 'my-file.txt'
+
+def upload_file_to_s3(bucket, file):
+    # Upload the file to the bucket
+    try:
+        s3.upload_file(file, bucket, file)
+        print(f"{file} uploaded successfully to {bucket}")
+    except Exception as e:
+        print(f"Error occurred while uploading file: {str(e)}")
+
+def list_files_in_bucket(bucket):
+    # List all files in the bucket
+    try:
+        response = s3.list_objects(Bucket=bucket)
+        for content in response['Contents']:
+            print(content['Key'])
+    except Exception as e:
+        print(f"Error occurred while listing files: {str(e)}")
+
+# Call the functions
+upload_file_to_s3(bucket_name, file_name)
+list_files_in_bucket(bucket_name)
+
+
+
+#what it does:
+#Imports the boto3 library. Sets up the S3 client. Defines the bucket name and the file name.
+#Defines a function to upload the file to the S3 bucket and handle any exceptions.
+#Defines a function to list all the files in the S3 bucket and handle any exceptions.
+#Calls the functions to upload the file and list all the files in the bucket.
