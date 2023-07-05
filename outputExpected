@@ -1,0 +1,3 @@
+#trivial expected output depending on file and bucket name
+my-file.txt uploaded successfully to my-bucket-name
+my-file.txt
